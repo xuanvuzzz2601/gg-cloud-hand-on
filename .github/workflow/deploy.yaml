@@ -27,7 +27,9 @@ jobs:
         run: |
           gcloud builds submit ./service1 \
             --tag gcr.io/$PROJECT_ID/service1 \
-            --logging CLOUD_LOGGING_ONLY
+            --logging=CLOUD_LOGGING_ONLY \
+            --no-source \
+            --no-source-log-url
 
           gcloud run deploy service1 \
             --image gcr.io/$PROJECT_ID/service1 \
@@ -53,7 +55,9 @@ jobs:
         run: |
           gcloud builds submit ./service2 \
             --tag gcr.io/$PROJECT_ID/service2 \
-            --logging CLOUD_LOGGING_ONLY
+            --logging=CLOUD_LOGGING_ONLY \
+            --no-source \
+            --no-source-log-url
 
           gcloud run deploy service2 \
             --image gcr.io/$PROJECT_ID/service2 \
