@@ -21,10 +21,10 @@ jobs:
         with:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          export_default_credentials: true                            :contentReference[oaicite:0]{index=0}
+          export_default_credentials: true         
 
       - name: Update gcloud components
-        run: gcloud components update                               :contentReference[oaicite:1]{index=1}
+        run: gcloud components update                         
 
       - name: Build and deploy service1
         run: |
@@ -51,10 +51,10 @@ jobs:
         with:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          export_default_credentials: true                            :contentReference[oaicite:2]{index=2}
+          export_default_credentials: true                        
 
       - name: Update gcloud components
-        run: gcloud components update                               :contentReference[oaicite:3]{index=3}
+        run: gcloud components update                          
 
       - name: Build and deploy service2
         run: |
