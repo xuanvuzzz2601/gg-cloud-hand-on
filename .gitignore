@@ -1,3 +1,6 @@
+# không push cridentials lên git
+github-cicd-key.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
