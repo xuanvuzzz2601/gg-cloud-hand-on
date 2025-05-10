@@ -31,8 +31,8 @@ jobs:
           gcloud builds submit ./service1 \
             --tag gcr.io/$PROJECT_ID/service1 \
             --logging=CLOUD_LOGGING_ONLY \
-            --no-source \
-            --no-source-log-url
+            --no-source
+
           gcloud run deploy service1 \
             --image gcr.io/$PROJECT_ID/service1 \
             --region $REGION \
@@ -61,8 +61,8 @@ jobs:
           gcloud builds submit ./service2 \
             --tag gcr.io/$PROJECT_ID/service2 \
             --logging=CLOUD_LOGGING_ONLY \
-            --no-source \
-            --no-source-log-url
+            --no-source
+            
           gcloud run deploy service2 \
             --image gcr.io/$PROJECT_ID/service2 \
             --region $REGION \
