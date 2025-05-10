@@ -27,7 +27,7 @@ jobs:
         run: |
           gcloud builds submit ./service1 \
             --tag gcr.io/$PROJECT_ID/service1 \
-            --logging=CLOUD_LOGGING_ONLY
+            --logging=None
 
           gcloud run deploy service1 \
             --image gcr.io/$PROJECT_ID/service1 \
