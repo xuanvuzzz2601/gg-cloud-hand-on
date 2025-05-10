@@ -1,0 +1,70 @@
+name: Deploy microservices to Cloud Run
+
+on:
+  push:
+    branches: [main]
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: ${{ secrets.GCP_REGION }}
+
+jobs:
+  deploy-service1:
+    name: Deploy service1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          export_default_credentials: true                            :contentReference[oaicite:0]{index=0}
+
+      - name: Update gcloud components
+        run: gcloud components update                               :contentReference[oaicite:1]{index=1}
+
+      - name: Build and deploy service1
+        run: |
+          gcloud builds submit ./service1 \
+            --tag gcr.io/$PROJECT_ID/service1 \
+            --logging=CLOUD_LOGGING_ONLY \
+            --no-source \
+            --no-source-log-url
+          gcloud run deploy service1 \
+            --image gcr.io/$PROJECT_ID/service1 \
+            --region $REGION \
+            --platform managed \
+            --allow-unauthenticated
+
+  deploy-service2:
+    name: Deploy service2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          export_default_credentials: true                            :contentReference[oaicite:2]{index=2}
+
+      - name: Update gcloud components
+        run: gcloud components update                               :contentReference[oaicite:3]{index=3}
+
+      - name: Build and deploy service2
+        run: |
+          gcloud builds submit ./service2 \
+            --tag gcr.io/$PROJECT_ID/service2 \
+            --logging=CLOUD_LOGGING_ONLY \
+            --no-source \
+            --no-source-log-url
+          gcloud run deploy service2 \
+            --image gcr.io/$PROJECT_ID/service2 \
+            --region $REGION \
+            --platform managed \
+            --allow-unauthenticated
