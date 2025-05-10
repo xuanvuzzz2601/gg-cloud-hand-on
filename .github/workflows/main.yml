@@ -28,7 +28,7 @@ jobs:
 
       - name: Build and deploy service1
         run: |
-          gcloud builds submit ./service1 \
+          gcloud builds submit service1 \
             --tag gcr.io/$PROJECT_ID/service1
 
           gcloud run deploy service1 \
@@ -56,7 +56,7 @@ jobs:
 
       - name: Build and deploy service2
         run: |
-          gcloud builds submit ./service2 \
+          gcloud builds submit service2 \
             --tag gcr.io/$PROJECT_ID/service2 
 
           gcloud run deploy service2 \
