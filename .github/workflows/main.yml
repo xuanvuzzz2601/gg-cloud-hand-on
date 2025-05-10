@@ -34,10 +34,12 @@ jobs:
 
       - name: Build and deploy service1
         run: |
-          gcloud builds submit --no-source \
-                              --gcs-source-staging-dir=gs://aiagent-ezinsight-bucket/service1/logs \
-                              --config=service1/cloudbuild.yaml
+          # Tải mã nguồn lên Cloud Build
+          gcloud builds submit service1/ \
+                                  --tag gcr.io/$PROJECT_ID/service1 \
+                                  --gcs-source-staging-dir=gs://aiagent-ezinsight-bucket/aiagent/service1
 
+          # Deploy service lên Cloud Run
           gcloud run deploy service1 \
             --image gcr.io/$PROJECT_ID/service1 \
             --region $REGION \
@@ -70,11 +72,9 @@ jobs:
 
       - name: Build and deploy service2
         run: |
-          # gcloud builds submit service2 \
-          #   --tag gcr.io/$PROJECT_ID/service2 
-          gcloud builds submit --no-source \
-                              --gcs-source-staging-dir=gs://aiagent-ezinsight-bucket/service1/logs \
-                              --config=service2/cloudbuild.yaml
+          gcloud builds submit service2/ \
+                                  --tag gcr.io/$PROJECT_ID/service2 \
+                                  --gcs-source-staging-dir=gs://aiagent-ezinsight-bucket/aiagent/service2
 
           gcloud run deploy service2 \
             --image gcr.io/$PROJECT_ID/service2 \
