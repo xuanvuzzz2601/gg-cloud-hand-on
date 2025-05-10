@@ -44,6 +44,7 @@ jobs:
             --image gcr.io/$PROJECT_ID/service1 \
             --region $REGION \
             --platform managed \
+            --timeout 600s \
             --allow-unauthenticated
 
   deploy-service2:
@@ -82,4 +83,5 @@ jobs:
             --image gcr.io/$PROJECT_ID/service2 \
             --region $REGION \
             --platform managed \
+            --timeout 600s \
             --allow-unauthenticated
