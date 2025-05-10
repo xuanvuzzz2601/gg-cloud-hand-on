@@ -36,7 +36,7 @@ jobs:
         run: |
           gcloud builds submit --no-source \
                               --gcs-source-staging-dir=gs://aiagent-ezinsight-bucket/service1/logs \
-                              --config=cloudbuild.yaml
+                              --config=service1/cloudbuild.yaml
 
           gcloud run deploy service1 \
             --image gcr.io/$PROJECT_ID/service1 \
@@ -70,9 +70,11 @@ jobs:
 
       - name: Build and deploy service2
         run: |
+          # gcloud builds submit service2 \
+          #   --tag gcr.io/$PROJECT_ID/service2 
           gcloud builds submit --no-source \
-                              --gcs-source-staging-dir=gs://aiagent-ezinsight-bucket/service2/logs \
-                              --config=cloudbuild.yaml
+                              --gcs-source-staging-dir=gs://aiagent-ezinsight-bucket/service1/logs \
+                              --config=service2/cloudbuild.yaml
 
           gcloud run deploy service2 \
             --image gcr.io/$PROJECT_ID/service2 \
